@@ -1,0 +1,21 @@
+
+
+#contentswitchermain{
+
+width: 100%;
+
+}
+
+
+
+.contentswitcher {
+    display: flex;
+   gap:4%; ;
+   justify-content: center;
+   
+}
+.contentswitcher>div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

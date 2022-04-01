@@ -1,0 +1,57 @@
+
+
+.FullpostContainerpopup{
+
+    width: 100%;
+    background-color: rgb(108, 101, 101);
+    padding-top: 40px;
+    padding-bottom: 50px;
+    }
+
+
+
+.FullpostContainer{
+
+
+display: flex;
+justify-content: center;
+height: 600px;
+
+
+}
+
+.Fullpostcommentsection{
+
+
+
+    height: 85%;
+    
+    
+    
+    }
+
+    .Fullpostcommentsesctioncontainer{
+
+
+     width: 40%;
+     background-color: white;
+     padding-left: 1%;
+     padding-right: 1%;
+
+    }
+
+
+    .FullpostContainer>div:nth-child(1){
+
+
+       width:40%;
+       height: 600px;
+
+
+    }
+    .FullpostContainer>div:nth-child(1) img{
+
+      height: 100%;
+      width: 100%;
+
+    }
