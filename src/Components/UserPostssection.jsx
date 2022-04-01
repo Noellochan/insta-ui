@@ -1,66 +1,29 @@
-import { useEffect, useState } from "react"
+import { ImageList, ImageListItem } from "@mui/material";
+import { Box } from "@mui/system";
 
-import axios from 'axios'
-export const Postsection=()=>{
-
-const [posts,setposts]=useState([
-
-{
-img:"https://cuteprofilepictures.weebly.com/uploads/2/1/8/5/21856578/8725169_orig.jpg",
-id:"1"
-},
-{
-
-    img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7IFXH5YNUERdpOz7W76TTHPKe56mtQfFWaRuVLSNVS2spDMhkMAPBKyJ7oCrAhwf1i-I&usqp=CAU",
-    id:"2"
-
-}
-])
-
-
-
-
-
-
-
-
-
-
-
-
-
-// useEffect()
-
-
-
-
-// function getposts()
-// {
-// axios.get("")
-
-
-
-// }
-
-
-
-
-return (
-
-<div className="Userpostcontainer">
-{posts.map((e)=><div className="userpostimages">{console.log(e.img,"ingg")}<img src={e.img} alt="" /></div>)}
-
-
-
-</div>
-
-
-
-
-
-)
-
-
-
-
-}
+export const Postsection = ({ data }) => {
+  return (
+    <Box
+      sx={{
+        width: "70%",
+        height: "fit-content",
+        margin: "auto",
+        overflow: "auto",
+      }}
+    >
+      <ImageList variant="masonry" cols={3} gap={8}>
+        {data.map((item) => (
+          <ImageListItem key={item.img}>
+            <img
+              style={{ width: "300px", height: "300px" }}
+              src={`${item.post_image}?w=164&h=164&fit=crop&auto=format`}
+              srcSet={`${item.post_image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+              alt={item.title}
+              loading="lazy"
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    </Box>
+  );
+};

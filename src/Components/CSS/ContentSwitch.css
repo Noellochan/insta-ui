@@ -1,21 +1,23 @@
-
-
-#contentswitchermain{
-
-width: 100%;
-
+#contentswitchermain {
+  width: 80%;
+  margin: auto;
 }
-
-
 
 .contentswitcher {
-    display: flex;
-   gap:4%; ;
-   justify-content: center;
-   
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
 }
-.contentswitcher>div{
-    display: flex;
-    align-items: center;
-    gap: 10px;
+
+.contentswitcher p {
+  font-size: 12px;
+  color: gray;
+  cursor: pointer;
+}
+
+.contentswitcher > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }

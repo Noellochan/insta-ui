@@ -1,111 +1,129 @@
-
-
-
-
-
-
-.randompostContainer{
-    
-width:40%;
-height: 700px;
-border: 1px solid rgb(205, 195, 195);
-margin: auto;
-margin-top: 40px;
-border-radius: 1%;
+.randompostContainer {
+  width: 40%;
+  height: fit-content;
+  border: 1px solid rgb(205, 195, 195);
+  margin: auto;
+  margin-top: 40px;
+  max-width: 600px;
 }
 
-
-.randompostUsername{
-display: flex;
-
-width:100%;
-gap:78%;
-margin: auto;
-
-
+.loader {
+  width: 40%;
+  height: fit-content;
+  margin: auto;
+  margin-top: 40px;
+  max-width: 600px;
 }
 
-.randompostUsername img{
-    width: 40px;
-height: 40px;
-border-radius: 50%;
-}
-.randompostUsername>div:nth-child(1){
+.randompostUsername {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-display: flex;
-gap: 10px;
-align-items: center;
-margin-left: 2%;
-
-}
-.randompostUsername>div:nth-child(2){
-    margin-right:4%;
- margin-top: 20px;
-
-
+  width: 100%;
+  height: 60px;
 }
 
-.randompostImage{
-
-width:100%;
-height: 500px;
-margin: auto;
-}
-.randompostImage>img{
-
-    width: 100%;
-height: 100%;
-
+.user-name {
+  display: bolder;
+  font-size: 13px;
+  cursor: pointer;
 }
 
-
-.randompostSharelike{
-
-display: flex;
-width: 100%;
-height: 40px;
-align-items: center;
-justify-content: space-between;
-margin: auto;
-font-size: 25px;
-
+.randompostUsername img {
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+  margin-left: 10px;
+  cursor: pointer;
 }
-.randompostSharelike div:nth-child(1)
-{
-width: 20%;
-display: flex;
-gap:10%;
-margin-left: 2%;
+.randompostUsername > div:nth-child(1) {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: 2%;
 }
-.randompostSharelike div:nth-child(2)
-{
-    margin-right: 2%;
+.randompostUsername > div:nth-child(2) {
+  margin-right: 20px;
+  cursor: pointer;
 }
 
-.randomposttime{
-   
-    width: 100%;
-    margin: auto;
-   
+.randompostImage {
+  width: 100%;
+  height: 600px;
+  margin: auto;
 }
-.randomposttime p{
-    margin-left: 20px;
-
-}
-
-.randompostComment{
-    width: 100%;
-display: flex;
-justify-content: space-between;
-margin: auto;
-font-size: 30px;
+.randompostImage > img {
+  width: 100%;
+  height: 100%;
 }
 
-.randompostComment input{
+.randompostSharelike {
+  width: 100%;
+  height: 40px;
+  margin: auto;
+  font-size: 25px;
+  min-height: 100px;
+  padding-top: 10px;
+  border-bottom: 1px solid rgb(205, 195, 195);
+}
+.randompostSharelike div:nth-child(1) {
+}
+.randompostSharelike div:nth-child(2) {
+  margin-right: 2%;
+}
+.icons-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0 15px;
+}
 
-width: 70%;
-height: 30px;
-border: none transparent;
-    outline: none;
+.icons-container svg {
+  cursor: pointer;
+}
 
+.icons-container > div {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.likes-count {
+  font-size: 15px;
+  font-weight: 900;
+  padding: 0 18px;
+}
+
+.time-posted {
+  font-size: 10px;
+  color: grey;
+  text-transform: uppercase;
+  padding: 0 20px;
+}
+
+.randomposttime {
+  width: 100%;
+  margin: auto;
+}
+.randomposttime p {
+  margin-left: 20px;
+}
+
+.randompostComment {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  font-size: 30px;
+}
+
+.randompostComment input {
+  width: 70%;
+  height: 30px;
+  border: none transparent;
+  outline: none;
+}
+
+.post-btn {
 }
