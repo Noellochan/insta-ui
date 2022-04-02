@@ -1,5 +1,6 @@
 import { Dialog, Input } from "@mui/material";
 import moment from "moment";
+import { useEffect, useState } from "react";
 import { FaRegComment, FaTelegramPlane } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import { MdMoreHoriz } from "react-icons/md";
@@ -12,8 +13,14 @@ import {
   Wrapper,
 } from "./styles";
 
-export const CommentModal = ({ data, open, onClose, likeDislikePost }) => {
-  console.log(data);
+export const CommentModal = ({
+  data,
+  open,
+  onClose,
+  likeDislikePost,
+  postComment,
+}) => {
+  const [comment, setComment] = useState("");
 
   return (
     <Wrapper>
@@ -21,6 +28,7 @@ export const CommentModal = ({ data, open, onClose, likeDislikePost }) => {
         style={{ height: "80vh" }}
         open={open}
         onClose={onClose}
+        fullWidth
         maxWidth="lg"
       >
         <Content>
@@ -40,7 +48,14 @@ export const CommentModal = ({ data, open, onClose, likeDislikePost }) => {
                 <MdMoreHoriz fontSize={"20px"} />
               </div>
             </Header>
-            <CommentSection></CommentSection>
+            <CommentSection>
+              {data?.post_comment?.map((el, i) => (
+                <div key={i}>
+                  <h5>{el?.posted_user?.user_name || ""}</h5>
+                  <p>{el.title}</p>
+                </div>
+              ))}
+            </CommentSection>
             <Footer>
               <div className="randompostSharelike">
                 <div className="icons-container">
@@ -88,8 +103,18 @@ export const CommentModal = ({ data, open, onClose, likeDislikePost }) => {
                   disableUnderline
                   type="text"
                   placeholder="Add a comment..."
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
                 />
-                <span className="comment-btn">Post</span>
+                <span
+                  onClick={() => {
+                    postComment(data, comment);
+                    setComment("");
+                  }}
+                  className="comment-btn"
+                >
+                  Post
+                </span>
               </CommentButton>
             </Footer>
           </div>

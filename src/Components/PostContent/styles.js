@@ -5,6 +5,10 @@ height: 500px;
 display: flex;
 align-items: flex-start;
 
+@media only screen and (max-width: 800px){
+  flex-direction: column;
+}
+
 .close-icon {
   position: absolute;
   right: 10px;
@@ -30,11 +34,23 @@ height: 100%;
 flex-direction: column;
 background: ${({ image }) => (image ? "black" : "white")};
 padding-left: 10px;
+
+@media only screen and (max-width: 800px){
+  display: block;
+  margin-top: 30px;
+  margin-left: 14px;
+}
 }
 
 .right-container {
   padding: 20px;
   margin: auto;
+
+  @media only screen and (max-width: 800px){
+    padding: 20px;
+    margin: 0;
+    width: 80%;
+  }
 }
 
 .image-upload {
@@ -87,6 +103,10 @@ export const ButtonWrapper = styledComponents.div`
 display: flex;
 gap: 10px;
 margin-top: 20px;
+
+@media only screen and (max-width: 800px){
+  flex-direction: column;
+}
 
   button {
     width: 100%;

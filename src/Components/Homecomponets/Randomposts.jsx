@@ -34,25 +34,35 @@ export const Randonpost = () => {
       .then((res) => {
         setData(res.data);
         setLoading(false);
+        let response = res.data;
+        if (Object.keys(profileData).length) {
+          let profile = response.filter((el) => el?._id === profileData?._id);
+          if (profile.length) setProfileData(profile[0]);
+        }
       });
   };
 
-  const postComment = (data) => {
-    const post_id = data?.post_id?._id;
-    const user_id = data?.user_id?._id;
+  const postComment = (data, comment) => {
+    const post_id = data?._id;
+    const posted_user = data?.user_id?._id;
+
     const payload = {
       title: comment,
-      post_id,
-      user_id,
+      posted_user,
     };
     axios
-      .get(`https://thebackendinsta.herokuapp.com/comment`, payload, {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      })
+      .post(
+        `https://thebackendinsta.herokuapp.com/comment/${post_id}`,
+        payload,
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      )
       .then((res) => {
-        setData(res.data);
+        console.log(res);
+        getAllPosts();
         setLoading(false);
       });
     setComment("");
@@ -165,6 +175,19 @@ export const Randonpost = () => {
               <p className="likes-count">
                 {(el?.post_likers?.length || 0) + " " + "Likes"}
               </p>
+              {el?.post_comment?.length ? (
+                <p
+                  className="comment-tag"
+                  onClick={() => {
+                    setProfileData(el);
+                    setOpenModal(true);
+                  }}
+                >
+                  {el?.post_comment.length > 1
+                    ? "VIEW 1 COMMENT"
+                    : `VIEW ${el?.post_comment?.length} COMMENT`}
+                </p>
+              ) : null}
               <p className="time-posted">
                 {moment(el?.updatedAt).startOf("hour").fromNow()}
               </p>
@@ -177,7 +200,10 @@ export const Randonpost = () => {
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
               />
-              <span onClick={() => postComment(el)} className="comment-btn">
+              <span
+                onClick={() => postComment(el, comment)}
+                className="comment-btn"
+              >
                 Post
               </span>
             </CommentButton>
@@ -189,6 +215,7 @@ export const Randonpost = () => {
         onClose={() => setOpenModal(false)}
         data={profileData}
         likeDislikePost={likeDislikePost}
+        postComment={postComment}
       />
     </>
   );
@@ -208,6 +235,6 @@ const CommentButton = styledComponents.div`
     top: 7px;
     font-size: 14px;
     color: #0095f6;
+    cursor: pointer;
 }
-
 `;

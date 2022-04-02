@@ -7,25 +7,24 @@ export const Wrapper = styledComponents.div`
 export const Content = styledComponents.div`
     display: flex;
     height: 90vh;
-    width: 80%;
 
     > div {
-        flex: 1;
+        flex:1;
     }
+
     .first-half{
-        flex: 1;
         background: black;
         display:flex;
         align-items: center;
 
         > img {
-
+            width: 100%;
+            height: fit-content;
         }
     }
     .second-half {
-        flex: 1;
+
         width: 100%;
-        min-width: 500px;
         display: flex;
         flex-direction: column;
     }
@@ -62,6 +61,20 @@ export const Header = styledComponents.div`
 export const CommentSection = styledComponents.div`
         flex: 4;
         border-bottom: 1px solid #efefef;
+        padding: 8px;
+        overflowY: auto;
+
+        div{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 22px;
+        }
+
+        p {
+            font-size: 12px;
+            color: grey;
+        }
 `;
 
 export const Footer = styledComponents.div`
