@@ -17,9 +17,13 @@ import { Signup } from "./Components/Signup";
 import { Route, Routes } from "react-router-dom";
 import { PrivateRoute } from "./PrivateRoute";
 import Footer from "./Components/footer";
+import styledComponents from "styled-components";
 function App() {
+
+
+
   return (
-    <>
+    <Wrapper>
       <Nav />
 
       <Routes>
@@ -43,8 +47,12 @@ function App() {
       </Routes>
 
       <Footer />
-    </>
+    </Wrapper>
   );
 }
+
+const Wrapper = styledComponents.div`
+  background-color: rgb(250,250,250);
+`;
 
 export default App;

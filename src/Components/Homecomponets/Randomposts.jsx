@@ -3,19 +3,21 @@ import axios from "axios";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { BiDotsHorizontal } from "react-icons/bi";
-
-import { BsHeart } from "react-icons/bs";
 import { FaRegComment } from "react-icons/fa";
 import { FaTelegramPlane } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
 import styledComponents from "styled-components";
+import { CommentModal } from "../CommentModal";
 import { InstagramSkeleton } from "../skeleton";
 
 export const Randonpost = () => {
   const [data, setData] = useState([]);
+  const [profileData, setProfileData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [comment, setComment] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,8 +37,30 @@ export const Randonpost = () => {
       });
   };
 
+  const postComment = (data) => {
+    const post_id = data?.post_id?._id;
+    const user_id = data?.user_id?._id;
+    const payload = {
+      title: comment,
+      post_id,
+      user_id,
+    };
+    axios
+      .get(`https://thebackendinsta.herokuapp.com/comment`, payload, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        setData(res.data);
+        setLoading(false);
+      });
+    setComment("");
+  };
+
   const likeDislikePost = (postId, userId, list) => {
-    if (list?.post_likes.some(userId)) return null;
+    let user = list?.post_likers?.filter((el) => el === userId);
+    if (user?.length) return null;
     else {
       axios
         .post(
@@ -53,6 +77,7 @@ export const Randonpost = () => {
               return { ...el, post_likers: [...el?.post_likers, userId] };
             } else return el;
           });
+          setProfileData(res.data);
           setData(newData);
         });
     }
@@ -91,6 +116,10 @@ export const Randonpost = () => {
 
             <div className="randompostImage">
               <img
+                onClick={() => {
+                  setProfileData(el);
+                  setOpenModal(true);
+                }}
                 src={
                   el?.post_image ||
                   "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
@@ -145,12 +174,22 @@ export const Randonpost = () => {
                 disableUnderline
                 type="text"
                 placeholder="Add a comment..."
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
               />
-              <span className="comment-btn">Post</span>
+              <span onClick={() => postComment(el)} className="comment-btn">
+                Post
+              </span>
             </CommentButton>
           </div>
         ))
       )}
+      <CommentModal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        data={profileData}
+        likeDislikePost={likeDislikePost}
+      />
     </>
   );
 };
